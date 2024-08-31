@@ -2,8 +2,8 @@
 
 import { FormEvent, Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { addUserEmailToProduct } from "@/lib/action";
 import Image from "next/image";
-import { addUserEmailToProduct } from "@/lib/actions";
 
 interface Props {
   productId: string;
