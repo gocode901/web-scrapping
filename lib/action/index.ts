@@ -23,24 +23,45 @@ export async function scrapeAndStoreProduct(productURL:string){
              ]
              product={
            ...scrapedProduct,
-                priceHistory:updatedPriceHistory,
+                priceHistory:updatedPriceHistory,     // update price history;
                 lowestPrice:getLowestPrice(updatedPriceHistory),
                 averagePrice: getAveragePrice(updatedPriceHistory),
                 highestPrice: getHighestPrice(updatedPriceHistory),
 
              }
 
-             const newProduct= await Product.findOne(
+             const newProduct= await Product.findOneAndUpdate(
                { url: scrapedProduct.url},
-                product,
-                {upsert: true,new : true}
+                product,                           // update product;
+                {upsert: true, new : true}   // if new one is added then add
                )
-
       revalidatePath(`/products/${newProduct._id}`);
-             
      }
 
     } catch (error:any) { 
         throw new Error(`failed to scrape: ${error.message}`);
+    }
+}
+export async function getProductById(productId:string){
+    try {
+        connectToDB();
+        // fetch product 
+        const product = await Product.findOne({_id: productId});
+        if(!product) return null;
+
+        return product;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getAllProducts(){
+    try {
+        connectToDB();
+        // fetch all products
+        const products = await Product.find();
+        return products;
+    } catch (error) {
+        console.log(error);
     }
 }

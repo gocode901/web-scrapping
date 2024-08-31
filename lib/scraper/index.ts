@@ -4,7 +4,7 @@ import { extractCurrency, extractDescription, extractPrice } from '../utils';
 export async function scrapeAmazonProduct(url:string) {
     if(!url) return;
 
-// curl --proxy brd.superproxy.io:22225 --proxy-user brd-customer-hl_80f5b354-zone-web_unlocker9:0shx8t1x17gj -k "https://geo.brdtest.com/welcome.txt"
+// curl --proxy brd.superproxy.io:22225 --proxy-user brd-customer-hl_80f5b354-zone-web_unlocker1:zqn66vrg3i7s -k "https://geo.brdtest.com/welcome.txt"
 
     /// BrightData proxy configuration
     const username= String(process.env.BRIGHT_DATA_USERNAME)
@@ -76,7 +76,7 @@ export async function scrapeAmazonProduct(url:string) {
           rating :rating,
           category:'category',
           outOfStock:outOfStock,
-          Discription,
+          // Discription,
           priceHistory:[],
           lowestPrice:Number(currentPrice)|| Number(originalPrice),
           highestPrice:Number(originalPrice)||Number(currentPrice),
@@ -84,7 +84,8 @@ export async function scrapeAmazonProduct(url:string) {
 
 
         };
-        console.log(data);
+        // console.log(data);
+        return data;
 
       } catch (error:any) {
         throw new Error(`failed to scrape: ${error.message}`)

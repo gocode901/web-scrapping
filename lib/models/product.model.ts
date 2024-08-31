@@ -7,8 +7,9 @@ const productSchema= new mongoose.Schema({
     title:{type: String},
     currentPrice:{type: Number,required:true},
     originalPrice:{type: Number,required:true},
-    priceHistory:{price:{type: Number,required:true},
-     date:{type:Date,default:Date.now }},
+    priceHistory:{
+        price:{type: Number,required:true},
+        date:{type:Date,default:Date.now }},
     outOfStock:{type:Boolean ,default:false},
     discountRate:{type: Number},
     lowestPrice:{type: Number},
